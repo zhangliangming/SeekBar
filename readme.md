@@ -35,6 +35,8 @@ https://github.com/zhangliangming/HappyPlayer5.git 。
 - setThumbColor：设置游标颜色
 - setTimePopupWindowViewColor：设置时间弹窗颜色
 - setTimeAndLrcPopupWindowViewColor：设置时间和歌词弹窗颜色
+- OnMusicListener.getTimeText：获取时间标签，如果需要弹出窗口时，不能返回null。
+- OnMusicListener.getLrcText：如果需要弹出歌词窗口时，不能返回null。
 # 日志 #
 ## v1.1 ##
 1. 实现初始功能
