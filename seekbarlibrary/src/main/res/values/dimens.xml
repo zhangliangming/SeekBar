@@ -1,0 +1,8 @@
+<resources>
+
+
+    <dimen name="pop_height">40dp</dimen>
+    <dimen name="pop_Padding">10dp</dimen>
+
+
+</resources>
