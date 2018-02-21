@@ -372,6 +372,14 @@ public class MusicSeekBar extends CustomSeekBar {
         return Color.argb(alpha, red, green, blue);
     }
 
+    public void setTimePopupWindowViewColor(int mTimePopupWindowViewColor) {
+        this.mTimePopupWindowViewColor = mTimePopupWindowViewColor;
+    }
+
+    public void setTimeAndLrcPopupWindowViewColor(int mTimeAndLrcPopupWindowViewColor) {
+        this.mTimeAndLrcPopupWindowViewColor = mTimeAndLrcPopupWindowViewColor;
+    }
+
     /**
      * 音乐进度条监听事件
      */
