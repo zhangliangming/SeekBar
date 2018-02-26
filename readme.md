@@ -38,6 +38,8 @@ https://github.com/zhangliangming/HappyPlayer5.git 。
 - OnMusicListener.getTimeText：获取时间标签，如果需要弹出窗口时，不能返回null。
 - OnMusicListener.getLrcText：如果需要弹出歌词窗口时，不能返回null。
 # 日志 #
+## v1.2 ##
+1. 修复弹出窗口报max == 0的问题
 ## v1.1 ##
 1. 实现初始功能
 

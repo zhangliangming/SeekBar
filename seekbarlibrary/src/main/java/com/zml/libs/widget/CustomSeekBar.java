@@ -170,8 +170,9 @@ public class CustomSeekBar extends View {
 
     @Override
     public boolean onTouchEvent(MotionEvent event) {
-        if (!isEnabled)
+        if (!isEnabled || getMax() == 0)
             return super.onTouchEvent(event);
+
 
 
         float curX = event.getX();
@@ -350,6 +351,7 @@ public class CustomSeekBar extends View {
 
         /**
          * 拖动结束
+         *
          * @param seekBar
          */
         void onTrackingTouchFinish(CustomSeekBar seekBar);
