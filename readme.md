@@ -18,7 +18,7 @@ https://github.com/zhangliangming/HappyPlayer5.git 。
 2.app build.gradle
 
 `dependencies {
-	         compile 'com.github.zhangliangming:SeekBar:v1.1'
+	         compile 'com.github.zhangliangming:SeekBar:v1.2'
 	}`
 
 # 调用用法 #
