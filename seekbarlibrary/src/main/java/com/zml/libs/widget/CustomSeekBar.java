@@ -174,7 +174,6 @@ public class CustomSeekBar extends View {
             return super.onTouchEvent(event);
 
 
-
         float curX = event.getX();
         float curY = event.getY();
 
@@ -252,6 +251,13 @@ public class CustomSeekBar extends View {
     private void invalidateProgress(MotionEvent event) {
         if (getMax() != 0) {
             int curX = (int) event.getX();
+            if (curX < 0) {
+                curX = 0;
+            }
+            if (curX > getWidth()) {
+                curX = getWidth();
+            }
+
             int progress = curX * getMax() / getWidth();
             mProgress = Math.min(getMax(), progress);
             invalidate();
