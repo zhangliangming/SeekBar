@@ -3,6 +3,10 @@
 https://github.com/zhangliangming/HappyPlayer5.git 。
 
 # 日志 #
+
+## v1.5 ##
+1. 修复bug
+
 ## v1.4 ##
 1. view修改为SeekBar
 
@@ -31,7 +35,7 @@ https://github.com/zhangliangming/HappyPlayer5.git 。
 2.app build.gradle
 
 `dependencies {
-	         compile 'com.github.zhangliangming:SeekBar:v1.4'
+	         compile 'com.github.zhangliangming:SeekBar:v1.5'
 	}`
 
 # 调用Demo #

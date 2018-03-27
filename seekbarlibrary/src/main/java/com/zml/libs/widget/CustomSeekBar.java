@@ -102,8 +102,10 @@ public class CustomSeekBar extends SeekBar {
         setOnSeekBarChangeListener(new OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
-                if (mOnChangeListener != null) {
-                    mOnChangeListener.onProgressChanged(CustomSeekBar.this);
+                if (mTrackTouch == TRACKTOUCH_START) {
+                    if (mOnChangeListener != null) {
+                        mOnChangeListener.onProgressChanged(CustomSeekBar.this);
+                    }
                 }
             }
 
@@ -118,9 +120,10 @@ public class CustomSeekBar extends SeekBar {
             public void onStopTrackingTouch(SeekBar seekBar) {
                 if (mTrackTouch == TRACKTOUCH_START) {
                     setTrackTouch(TRACKTOUCH_NONE);
-                }
-                if (mOnChangeListener != null) {
-                    mOnChangeListener.onTrackingTouchFinish(CustomSeekBar.this);
+
+                    if (mOnChangeListener != null) {
+                        mOnChangeListener.onTrackingTouchFinish(CustomSeekBar.this);
+                    }
                 }
             }
         });
