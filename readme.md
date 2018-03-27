@@ -1,8 +1,11 @@
 # 简介 #
-该SeekBar由自定义view来实现，主要完成了普通的进度条（可修改进度条的颜色，游标颜色，二级进度条颜色等等），最后再在普通进度条的基础上实现了歌曲使用的进度条，可弹出窗口显示时间和歌词。该功能主要是在我的乐乐音乐播放器里面使用，其项目地址如下：
+该SeekBar主要完成了普通的进度条（可修改进度条的颜色，游标颜色，二级进度条颜色等等），最后再在普通进度条的基础上实现了歌曲使用的进度条，可弹出窗口显示时间和歌词。该功能主要是在我的乐乐音乐播放器里面使用，其项目地址如下：
 https://github.com/zhangliangming/HappyPlayer5.git 。
 
 # 日志 #
+## v1.4 ##
+1. view修改为SeekBar
+
 ## v1.3 ##
 1. 修复滑动越界后，出现进度为负数的问题
 ## v1.2 ##
@@ -28,7 +31,7 @@ https://github.com/zhangliangming/HappyPlayer5.git 。
 2.app build.gradle
 
 `dependencies {
-	         compile 'com.github.zhangliangming:SeekBar:v1.3'
+	         compile 'com.github.zhangliangming:SeekBar:v1.4'
 	}`
 
 # 调用Demo #

@@ -5,11 +5,10 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.RectF;
+import android.graphics.drawable.BitmapDrawable;
 import android.os.Handler;
 import android.util.AttributeSet;
-import android.view.MotionEvent;
-import android.view.View;
-import android.view.ViewConfiguration;
+import android.widget.SeekBar;
 
 
 /**
@@ -20,7 +19,7 @@ import android.view.ViewConfiguration;
  * @Date: 2018-02-14
  * @Throws:
  */
-public class CustomSeekBar extends View {
+public class CustomSeekBar extends SeekBar {
     /**
      * 背景画笔
      */
@@ -42,18 +41,6 @@ public class CustomSeekBar extends View {
     private Paint mThumbPaint;
 
     /**
-     * 进度
-     */
-    private int mProgress = 0;
-    /**
-     * 第二进度
-     */
-    private int mSecondaryProgress = 0;
-    /**
-     * 最大值
-     */
-    private int mMax = 0;
-    /**
      * 默认
      */
     private final int TRACKTOUCH_NONE = -1;
@@ -61,23 +48,10 @@ public class CustomSeekBar extends View {
      * 开始拖动
      */
     private final int TRACKTOUCH_START = 0;
-    /**
-     * 进度改变
-     */
-    private final int TRACKTOUCH_PROGRESSCHANGED = 1;
     private int mTrackTouch = TRACKTOUCH_NONE;
 
     private OnChangeListener mOnChangeListener;
-    /**
-     *
-     */
-    private boolean isEnabled = true;
 
-    private int mTouchSlop;
-    /**
-     * X轴和Y最后的位置
-     */
-    private float mLastX = 0, mLastY = 0;
     /**
      *
      */
@@ -124,7 +98,32 @@ public class CustomSeekBar extends View {
         mThumbPaint.setColor(Color.parseColor("#0288d1"));
 
         //
-        mTouchSlop = ViewConfiguration.get(context).getScaledTouchSlop();
+        setThumb(new BitmapDrawable());
+        setOnSeekBarChangeListener(new OnSeekBarChangeListener() {
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
+                if (mOnChangeListener != null) {
+                    mOnChangeListener.onProgressChanged(CustomSeekBar.this);
+                }
+            }
+
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {
+                if (mTrackTouch == TRACKTOUCH_NONE) {
+                    setTrackTouch(TRACKTOUCH_START);
+                }
+            }
+
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {
+                if (mTrackTouch == TRACKTOUCH_START) {
+                    setTrackTouch(TRACKTOUCH_NONE);
+                }
+                if (mOnChangeListener != null) {
+                    mOnChangeListener.onTrackingTouchFinish(CustomSeekBar.this);
+                }
+            }
+        });
     }
 
     @Override
@@ -145,7 +144,7 @@ public class CustomSeekBar extends View {
         canvas.drawRoundRect(backgroundRect, rSize, rSize, mBackgroundPaint);
 
 
-        if (getMax() != 0 && isEnabled) {
+        if (getMax() != 0) {
             RectF secondProgressRect = new RectF(leftPadding, getHeight() / 2 - height,
                     getSecondaryProgress() * getWidth() / getMax(), getHeight()
                     / 2 + height);
@@ -169,128 +168,10 @@ public class CustomSeekBar extends View {
     }
 
     @Override
-    public boolean onTouchEvent(MotionEvent event) {
-        if (!isEnabled || getMax() == 0)
-            return super.onTouchEvent(event);
-
-
-        float curX = event.getX();
-        float curY = event.getY();
-
-        int actionId = event.getAction();
-        switch (actionId) {
-
-            case MotionEvent.ACTION_DOWN:
-                mLastX = curX;
-                mLastY = curY;
-
-                if (mTrackTouch == TRACKTOUCH_NONE) {
-                    setTrackTouch(TRACKTOUCH_START);
-                    if (mOnChangeListener != null) {
-                        mOnChangeListener.onProgressChanged(this);
-                    }
-                    invalidateProgress(event);
-                }
-                break;
-
-            case MotionEvent.ACTION_MOVE:
-                int deltaX = (int) (mLastX - curX);
-                int deltaY = (int) (mLastY - curY);
-
-                if ((mTrackTouch == TRACKTOUCH_PROGRESSCHANGED) || (Math.abs(deltaX) > mTouchSlop
-                        && Math.abs(deltaY) < mTouchSlop)) {
-                    //左右移动
-                    if (mTrackTouch == TRACKTOUCH_START || mTrackTouch == TRACKTOUCH_PROGRESSCHANGED) {
-                        setTrackTouch(TRACKTOUCH_PROGRESSCHANGED);
-                        if (mOnChangeListener != null) {
-                            mOnChangeListener.onProgressChanged(this);
-                        }
-                        invalidateProgress(event);
-                    }
-                }
-                break;
-
-            default:
-                ;
-                if (mTrackTouch == TRACKTOUCH_START || mTrackTouch == TRACKTOUCH_PROGRESSCHANGED) {
-
-                    mHandler.removeCallbacks(mRunnable);
-                    mHandler.postDelayed(mRunnable, 200);
-
-                    if (mOnChangeListener != null) {
-                        mOnChangeListener.onTrackingTouchFinish(this);
-                    }
-
-                } else {
-                    setTrackTouch(TRACKTOUCH_NONE);
-                }
-                invalidateProgress(event);
-
-                break;
-        }
-
-        return true;
-    }
-
-    /**
-     *
-     */
-    private Runnable mRunnable = new Runnable() {
-        @Override
-        public void run() {
-            setTrackTouch(TRACKTOUCH_NONE);
-            postInvalidate();
-        }
-    };
-
-    /**
-     * 更新进度
-     *
-     * @param event
-     */
-    private void invalidateProgress(MotionEvent event) {
-        if (getMax() != 0) {
-            int curX = (int) event.getX();
-            if (curX < 0) {
-                curX = 0;
-            }
-            if (curX > getWidth()) {
-                curX = getWidth();
-            }
-
-            int progress = curX * getMax() / getWidth();
-            mProgress = Math.min(getMax(), progress);
-            invalidate();
-        }
-    }
-
     public synchronized void setProgress(int progress) {
         if (mTrackTouch == TRACKTOUCH_NONE && getMax() != 0) {
-            mProgress = Math.min(getMax(), progress);
-            postInvalidate();
+            super.setProgress(progress);
         }
-    }
-
-    public synchronized void setSecondaryProgress(int secondaryProgress) {
-        this.mSecondaryProgress = secondaryProgress;
-        postInvalidate();
-    }
-
-    public synchronized void setMax(int max) {
-        this.mMax = max;
-        postInvalidate();
-    }
-
-    public int getProgress() {
-        return mProgress;
-    }
-
-    public int getSecondaryProgress() {
-        return mSecondaryProgress;
-    }
-
-    public int getMax() {
-        return mMax;
     }
 
     private void setTrackTouch(int trackTouch) {
@@ -334,12 +215,6 @@ public class CustomSeekBar extends View {
      */
     public void setThumbColor(int thumbColor) {
         mThumbPaint.setColor(thumbColor);
-        postInvalidate();
-    }
-
-    @Override
-    public void setEnabled(boolean enabled) {
-        isEnabled = enabled;
         postInvalidate();
     }
 
