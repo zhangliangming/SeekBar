@@ -127,13 +127,13 @@ public class CustomSeekBar extends SeekBar {
             public void onStartTrackingTouch(SeekBar seekBar) {
                 if (mTrackTouch == TRACKTOUCH_NONE) {
                     setTrackTouch(TRACKTOUCH_START);
+                    mHandler.removeCallbacks(mRunnable);
                 }
             }
 
             @Override
             public void onStopTrackingTouch(SeekBar seekBar) {
                 if (mTrackTouch == TRACKTOUCH_START) {
-                    mHandler.removeCallbacks(mRunnable);
                     mHandler.postDelayed(mRunnable, mTrackingTouchSleepTime);
                     if (mOnChangeListener != null) {
                         mOnChangeListener.onTrackingTouchFinish(CustomSeekBar.this);
