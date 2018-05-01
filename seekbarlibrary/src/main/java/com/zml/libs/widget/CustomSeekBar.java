@@ -61,6 +61,15 @@ public class CustomSeekBar extends SeekBar {
      *
      */
     private Handler mHandler = new Handler();
+    /**
+     *
+     */
+    private Runnable mRunnable = new Runnable() {
+        @Override
+        public void run() {
+            setTrackTouch(TRACKTOUCH_NONE);
+        }
+    };
 
 
     public CustomSeekBar(Context context) {
@@ -124,19 +133,8 @@ public class CustomSeekBar extends SeekBar {
             @Override
             public void onStopTrackingTouch(SeekBar seekBar) {
                 if (mTrackTouch == TRACKTOUCH_START) {
-
-                    new Thread() {
-                        @Override
-                        public void run() {
-                            try {
-                                Thread.sleep(mTrackingTouchSleepTime);
-                            } catch (InterruptedException e) {
-                                e.printStackTrace();
-                            }
-                            setTrackTouch(TRACKTOUCH_NONE);
-                        }
-                    }.start();
-
+                    mHandler.removeCallbacks(mRunnable);
+                    mHandler.postDelayed(mRunnable, mTrackingTouchSleepTime);
                     if (mOnChangeListener != null) {
                         mOnChangeListener.onTrackingTouchFinish(CustomSeekBar.this);
                     }
