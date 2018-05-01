@@ -6,6 +6,7 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.RectF;
 import android.graphics.drawable.BitmapDrawable;
+import android.os.Handler;
 import android.util.AttributeSet;
 import android.widget.SeekBar;
 
@@ -51,6 +52,15 @@ public class CustomSeekBar extends SeekBar {
 
     private OnChangeListener mOnChangeListener;
 
+    //睡眠时间
+    private int mTrackingTouchSleepTime = 0;
+    private Handler mHandler = new Handler();
+    private Runnable mRunnable = new Runnable() {
+        @Override
+        public void run() {
+            setTrackTouch(TRACKTOUCH_NONE);
+        }
+    };
 
     public CustomSeekBar(Context context) {
         super(context);
@@ -105,6 +115,7 @@ public class CustomSeekBar extends SeekBar {
 
             @Override
             public void onStartTrackingTouch(SeekBar seekBar) {
+                mHandler.removeCallbacks(mRunnable);
                 if (mTrackTouch == TRACKTOUCH_NONE) {
                     setTrackTouch(TRACKTOUCH_START);
                     if (mOnChangeListener != null) {
@@ -119,7 +130,7 @@ public class CustomSeekBar extends SeekBar {
                     if (mOnChangeListener != null) {
                         mOnChangeListener.onTrackingTouchFinish(CustomSeekBar.this);
                     }
-                    setTrackTouch(TRACKTOUCH_NONE);
+                    mHandler.postDelayed(mRunnable, mTrackingTouchSleepTime);
                 }
             }
         });
@@ -219,6 +230,10 @@ public class CustomSeekBar extends SeekBar {
 
     public void setOnChangeListener(OnChangeListener onChangeListener) {
         this.mOnChangeListener = onChangeListener;
+    }
+
+    public void setTrackingTouchSleepTime(int mTrackingTouchSleepTime) {
+        this.mTrackingTouchSleepTime = mTrackingTouchSleepTime;
     }
 
     public interface OnChangeListener {

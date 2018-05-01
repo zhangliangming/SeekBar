@@ -4,8 +4,8 @@ https://github.com/zhangliangming/HappyPlayer5.git 。
 
 # 日志 #
 
-## v1.9 ##
-1. 修复onStartTrackingTouch
+## v2.0 ##
+1. 修复TrackingTouchSleepTime
 
 ## v1.6 ##
 1. 添加TrackingTouchSleepTime
