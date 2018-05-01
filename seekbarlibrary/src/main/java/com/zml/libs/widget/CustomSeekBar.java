@@ -53,6 +53,11 @@ public class CustomSeekBar extends SeekBar {
     private OnChangeListener mOnChangeListener;
 
     /**
+     * TrackingTouch之后的睡眠时间
+     */
+    private long mTrackingTouchSleepTime = 0;
+
+    /**
      *
      */
     private Handler mHandler = new Handler();
@@ -119,7 +124,18 @@ public class CustomSeekBar extends SeekBar {
             @Override
             public void onStopTrackingTouch(SeekBar seekBar) {
                 if (mTrackTouch == TRACKTOUCH_START) {
-                    setTrackTouch(TRACKTOUCH_NONE);
+
+                    new Thread() {
+                        @Override
+                        public void run() {
+                            try {
+                                Thread.sleep(mTrackingTouchSleepTime);
+                            } catch (InterruptedException e) {
+                                e.printStackTrace();
+                            }
+                            setTrackTouch(TRACKTOUCH_NONE);
+                        }
+                    }.start();
 
                     if (mOnChangeListener != null) {
                         mOnChangeListener.onTrackingTouchFinish(CustomSeekBar.this);
@@ -225,6 +241,10 @@ public class CustomSeekBar extends SeekBar {
         this.mOnChangeListener = onChangeListener;
     }
 
+    public void setTrackingTouchSleepTime(long mTrackingTouchSleepTime) {
+        this.mTrackingTouchSleepTime = mTrackingTouchSleepTime;
+    }
+
     public interface OnChangeListener {
         /**
          * 进度改变
@@ -232,6 +252,13 @@ public class CustomSeekBar extends SeekBar {
          * @param seekBar
          */
         void onProgressChanged(CustomSeekBar seekBar);
+
+        /**
+         * 开始拖动
+         *
+         * @param seekBar
+         */
+        void onTrackingTouchStart(CustomSeekBar seekBar);
 
         /**
          * 拖动结束

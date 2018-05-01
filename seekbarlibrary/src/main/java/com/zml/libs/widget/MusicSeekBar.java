@@ -141,6 +141,13 @@ public class MusicSeekBar extends CustomSeekBar {
             }
 
             @Override
+            public void onTrackingTouchStart(CustomSeekBar seekBar) {
+                if (mOnMusicListener != null) {
+                    mOnMusicListener.onTrackingTouchStart(MusicSeekBar.this);
+                }
+            }
+
+            @Override
             public void onTrackingTouchFinish(CustomSeekBar seekBar) {
                 mHandler.sendEmptyMessageDelayed(HIDEVIEW, 200);
                 if (mOnMusicListener != null) {
@@ -404,6 +411,14 @@ public class MusicSeekBar extends CustomSeekBar {
          * @param seekBar
          */
         void onProgressChanged(MusicSeekBar seekBar);
+
+        /**
+         * 开始拖动
+         *
+         * @param seekBar
+         */
+        void onTrackingTouchStart(MusicSeekBar seekBar);
+
 
         /**
          * 拖动结束

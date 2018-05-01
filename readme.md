@@ -4,6 +4,9 @@ https://github.com/zhangliangming/HappyPlayer5.git 。
 
 # 日志 #
 
+## v1.6 ##
+1. 添加TrackingTouchSleepTime
+
 ## v1.5 ##
 1. 修复bug
 
@@ -35,7 +38,7 @@ https://github.com/zhangliangming/HappyPlayer5.git 。
 2.app build.gradle
 
 `dependencies {
-	         compile 'com.github.zhangliangming:SeekBar:v1.5'
+	         compile 'com.github.zhangliangming:SeekBar:v1.6'
 	}`
 
 # 调用Demo #
