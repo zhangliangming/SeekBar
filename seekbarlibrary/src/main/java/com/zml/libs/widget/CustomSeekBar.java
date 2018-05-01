@@ -6,7 +6,6 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.RectF;
 import android.graphics.drawable.BitmapDrawable;
-import android.os.Handler;
 import android.util.AttributeSet;
 import android.widget.SeekBar;
 
@@ -51,25 +50,6 @@ public class CustomSeekBar extends SeekBar {
     private int mTrackTouch = TRACKTOUCH_NONE;
 
     private OnChangeListener mOnChangeListener;
-
-    /**
-     * TrackingTouch之后的睡眠时间
-     */
-    private long mTrackingTouchSleepTime = 0;
-
-    /**
-     *
-     */
-    private Handler mHandler = new Handler();
-    /**
-     *
-     */
-    private Runnable mRunnable = new Runnable() {
-        @Override
-        public void run() {
-            setTrackTouch(TRACKTOUCH_NONE);
-        }
-    };
 
 
     public CustomSeekBar(Context context) {
@@ -127,17 +107,19 @@ public class CustomSeekBar extends SeekBar {
             public void onStartTrackingTouch(SeekBar seekBar) {
                 if (mTrackTouch == TRACKTOUCH_NONE) {
                     setTrackTouch(TRACKTOUCH_START);
-                    mHandler.removeCallbacks(mRunnable);
+                    if (mOnChangeListener != null) {
+                        mOnChangeListener.onTrackingTouchStart(CustomSeekBar.this);
+                    }
                 }
             }
 
             @Override
             public void onStopTrackingTouch(SeekBar seekBar) {
                 if (mTrackTouch == TRACKTOUCH_START) {
-                    mHandler.postDelayed(mRunnable, mTrackingTouchSleepTime);
                     if (mOnChangeListener != null) {
                         mOnChangeListener.onTrackingTouchFinish(CustomSeekBar.this);
                     }
+                    setTrackTouch(TRACKTOUCH_NONE);
                 }
             }
         });
@@ -191,7 +173,7 @@ public class CustomSeekBar extends SeekBar {
         }
     }
 
-    private void setTrackTouch(int trackTouch) {
+    private synchronized void setTrackTouch(int trackTouch) {
         this.mTrackTouch = trackTouch;
     }
 
@@ -237,10 +219,6 @@ public class CustomSeekBar extends SeekBar {
 
     public void setOnChangeListener(OnChangeListener onChangeListener) {
         this.mOnChangeListener = onChangeListener;
-    }
-
-    public void setTrackingTouchSleepTime(long mTrackingTouchSleepTime) {
-        this.mTrackingTouchSleepTime = mTrackingTouchSleepTime;
     }
 
     public interface OnChangeListener {
