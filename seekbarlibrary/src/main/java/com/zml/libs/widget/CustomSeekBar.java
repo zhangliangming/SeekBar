@@ -52,7 +52,8 @@ public class CustomSeekBar extends SeekBar {
 
     private OnChangeListener mOnChangeListener;
 
-    //睡眠时间
+    //TrackingTouch
+    private boolean isTrackingTouch = false;
     private int mTrackingTouchSleepTime = 0;
     private Handler mHandler = new Handler();
     private Runnable mRunnable = new Runnable() {
@@ -115,6 +116,7 @@ public class CustomSeekBar extends SeekBar {
 
             @Override
             public void onStartTrackingTouch(SeekBar seekBar) {
+                isTrackingTouch = true;
                 mHandler.removeCallbacks(mRunnable);
                 if (mTrackTouch == TRACKTOUCH_NONE) {
                     setTrackTouch(TRACKTOUCH_START);
@@ -126,6 +128,7 @@ public class CustomSeekBar extends SeekBar {
 
             @Override
             public void onStopTrackingTouch(SeekBar seekBar) {
+                isTrackingTouch = false;
                 if (mTrackTouch == TRACKTOUCH_START) {
                     if (mOnChangeListener != null) {
                         mOnChangeListener.onTrackingTouchFinish(CustomSeekBar.this);
@@ -139,7 +142,7 @@ public class CustomSeekBar extends SeekBar {
     @Override
     protected synchronized void onDraw(Canvas canvas) {
         int rSize = getHeight() / 4;
-        if (mTrackTouch != TRACKTOUCH_NONE) {
+        if (isTrackingTouch) {
             rSize = getHeight() / 3;
         }
         int height = getHeight() / 4 / 3;
