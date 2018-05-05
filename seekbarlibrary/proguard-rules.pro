@@ -20,6 +20,7 @@
 # hide the original source file name.
 #-renamesourcefileattribute SourceFile
 
-
--keep public interface class com.zlm.libs.widget.CustomSeekBar$OnChangeListener{ public *;}
--keep public interface class com.zlm.libs.widget.MusicSeekBar$OnMusicListener{ public *; }
+-keep class com.zlm.libs.widget.**
+-keepclassmembers class com.zlm.libs.widget.** {
+   public *;
+}
