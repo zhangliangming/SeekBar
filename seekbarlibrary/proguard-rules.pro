@@ -20,6 +20,7 @@
 # hide the original source file name.
 #-renamesourcefileattribute SourceFile
 
+
 -keep class com.zlm.libs.widget.**
 -keepclassmembers class com.zlm.libs.widget.** {
    public *;
