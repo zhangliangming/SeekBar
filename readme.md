@@ -4,7 +4,7 @@ https://github.com/zhangliangming/HappyPlayer5.git 。
 
 # 日志 #
 
-## v2.8 ##
+## v2.9 ##
 1. 添加混淆
 2. 修改包名
 3. 修复
@@ -47,7 +47,7 @@ https://github.com/zhangliangming/HappyPlayer5.git 。
 2.app build.gradle
 
 `dependencies {
-	         compile 'com.github.zhangliangming:SeekBar:v2.8'
+	         compile 'com.github.zhangliangming:SeekBar:v2.9'
 	}`
 
 # 调用Demo #

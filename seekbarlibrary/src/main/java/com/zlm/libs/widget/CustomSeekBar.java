@@ -245,21 +245,21 @@ public class CustomSeekBar extends SeekBar {
          *
          * @param seekBar
          */
-        void onProgressChanged(CustomSeekBar seekBar);
+        public void onProgressChanged(CustomSeekBar seekBar);
 
         /**
          * 开始拖动
          *
          * @param seekBar
          */
-        void onTrackingTouchStart(CustomSeekBar seekBar);
+        public void onTrackingTouchStart(CustomSeekBar seekBar);
 
         /**
          * 拖动结束
          *
          * @param seekBar
          */
-        void onTrackingTouchFinish(CustomSeekBar seekBar);
+        public void onTrackingTouchFinish(CustomSeekBar seekBar);
 
     }
 }

@@ -397,28 +397,28 @@ public class MusicSeekBar extends CustomSeekBar {
          *
          * @return
          */
-        String getTimeText();
+        public String getTimeText();
 
         /**
          * 获取歌词标签
          *
          * @return
          */
-        String getLrcText();
+        public String getLrcText();
 
         /**
          * 进度改变
          *
          * @param seekBar
          */
-        void onProgressChanged(MusicSeekBar seekBar);
+        public void onProgressChanged(MusicSeekBar seekBar);
 
         /**
          * 开始拖动
          *
          * @param seekBar
          */
-        void onTrackingTouchStart(MusicSeekBar seekBar);
+        public void onTrackingTouchStart(MusicSeekBar seekBar);
 
 
         /**
@@ -426,6 +426,6 @@ public class MusicSeekBar extends CustomSeekBar {
          *
          * @param seekBar
          */
-        void onTrackingTouchFinish(MusicSeekBar seekBar);
+        public void onTrackingTouchFinish(MusicSeekBar seekBar);
     }
 }
