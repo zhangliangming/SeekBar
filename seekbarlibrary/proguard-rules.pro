@@ -28,3 +28,6 @@
 -keepclassmembers class com.zlm.libs.widget.MusicSeekBar {
    public *;
 }
+
+-keep public interface class com.zlm.libs.widget.CustomSeekBar$OnChangeListener{ *; }
+-keep public interface class com.zlm.libs.widget.MusicSeekBar$OnMusicListener{ *; }
