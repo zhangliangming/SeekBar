@@ -20,7 +20,11 @@
 # hide the original source file name.
 #-renamesourcefileattribute SourceFile
 
--keep class com.zml.libs.widget.**
--keepclassmembers class com.zml.libs.widget.** {
+-keep class com.zml.libs.widget.CustomSeekBar
+-keepclassmembers class com.zml.libs.widget.CustomSeekBar {
+   public *;
+}
+-keep class com.zml.libs.widget.MusicSeekBar
+-keepclassmembers class com.zml.libs.widget.MusicSeekBar {
    public *;
 }
