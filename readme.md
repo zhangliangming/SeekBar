@@ -4,8 +4,9 @@ https://github.com/zhangliangming/HappyPlayer5.git 。
 
 # 日志 #
 
-## v2.3 ##
+## v2.4 ##
 1. 添加混淆
+2. 修改包名
 
 ## v2.1 ##
 1. 修复onStopTrackingTouch
@@ -44,7 +45,7 @@ https://github.com/zhangliangming/HappyPlayer5.git 。
 2.app build.gradle
 
 `dependencies {
-	         compile 'com.github.zhangliangming:SeekBar:v2.3'
+	         compile 'com.github.zhangliangming:SeekBar:v2.4'
 	}`
 
 # 调用Demo #
