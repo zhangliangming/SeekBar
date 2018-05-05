@@ -20,6 +20,8 @@
 # hide the original source file name.
 #-renamesourcefileattribute SourceFile
 
+-ignorewarnings
+
 -keep class com.zlm.libs.widget.CustomSeekBar
 -keepclassmembers class com.zlm.libs.widget.CustomSeekBar {
    public *;
