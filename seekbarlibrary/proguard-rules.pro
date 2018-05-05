@@ -31,5 +31,5 @@
    public *;
 }
 
--keep public interface class com.zlm.libs.widget.CustomSeekBar$OnChangeListener{ *; }
--keep public interface class com.zlm.libs.widget.MusicSeekBar$OnMusicListener{ *; }
+-keep public interface class com.zlm.libs.widget.CustomSeekBar.OnChangeListener{ *; }
+-keep public interface class com.zlm.libs.widget.MusicSeekBar.OnMusicListener{ *; }
