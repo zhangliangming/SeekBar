@@ -50,6 +50,9 @@ https://github.com/zhangliangming/HappyPlayer5.git 。
 	         compile 'com.github.zhangliangming:SeekBar:v3.0'
 	}`
 
+# 混淆注意 #
+-keep class com.zlm.libs.widget.** { *; }
+
 # 调用Demo #
 链接: https://pan.baidu.com/s/1gg7jzWZ 密码: y3qd
 # 调用用法 #
