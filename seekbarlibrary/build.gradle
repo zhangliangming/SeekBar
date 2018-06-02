@@ -26,12 +26,8 @@ android {
     }
 
 }
-repositories {
-    flatDir {
-        dirs 'libs'
-    }
-}
+
 
 dependencies {
-    compile(name: 'Register-v1.0', ext: 'aar')
+    compile files('libs/register-v1.0.jar')
 }

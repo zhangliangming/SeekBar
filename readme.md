@@ -3,9 +3,9 @@
 https://github.com/zhangliangming/HappyPlayer5.git 。
 
 # 日志 #
-## v3.3 ##
+## v3.4 ##
 1. minSdkVersion 修改为19
-2.修改为aar文件
+2.修改为jar文件
 
 ## v3.0 ##
 1. 添加混淆
@@ -50,7 +50,7 @@ https://github.com/zhangliangming/HappyPlayer5.git 。
 2.app build.gradle
 
 `dependencies {
-	         compile 'com.github.zhangliangming:SeekBar:v3.3'
+	         compile 'com.github.zhangliangming:SeekBar:v3.4'
 	}`
 
 # 混淆注意 #
