@@ -10,6 +10,8 @@ import android.os.Handler;
 import android.util.AttributeSet;
 import android.widget.SeekBar;
 
+import com.zlm.libs.register.RegisterHelper;
+
 
 /**
  * @Description: 自定义普通进度条
@@ -77,6 +79,9 @@ public class CustomSeekBar extends SeekBar {
      * 初始化
      */
     private void init(Context context) {
+
+        RegisterHelper.verify();
+
         setBackgroundColor(Color.TRANSPARENT);
         //
         mBackgroundPaint = new Paint();
