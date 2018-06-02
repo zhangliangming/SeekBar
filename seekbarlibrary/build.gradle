@@ -1,6 +1,6 @@
 apply plugin: 'com.android.library'
 apply plugin: 'com.github.dcendents.android-maven'
-group='com.github.zhangliangming'
+group = 'com.github.zhangliangming'
 
 android {
     compileSdkVersion 26
@@ -26,7 +26,12 @@ android {
     }
 
 }
+repositories {
+    flatDir {
+        dirs 'libs'
+    }
+}
 
 dependencies {
-    api 'com.github.zhangliangming:Register:v1.0'
+    compile(name: 'Register-v1.0', ext: 'aar')
 }
