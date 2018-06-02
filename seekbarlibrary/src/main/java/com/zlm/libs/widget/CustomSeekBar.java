@@ -185,6 +185,7 @@ public class CustomSeekBar extends SeekBar {
         if (mTrackTouch == TRACKTOUCH_NONE && getMax() != 0) {
             super.setProgress(progress);
         }
+        postInvalidate();
     }
 
     private synchronized void setTrackTouch(int trackTouch) {
