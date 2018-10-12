@@ -193,6 +193,18 @@ public class CustomSeekBar extends SeekBar {
         postInvalidate();
     }
 
+    @Override
+    public synchronized void setSecondaryProgress(int secondaryProgress) {
+        super.setSecondaryProgress(secondaryProgress);
+        postInvalidate();
+    }
+
+    @Override
+    public synchronized void setMax(int max) {
+        super.setMax(max);
+        postInvalidate();
+    }
+
     private synchronized void setTrackTouch(int trackTouch) {
         this.mTrackTouch = trackTouch;
     }
