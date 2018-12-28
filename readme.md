@@ -80,8 +80,8 @@ https://github.com/zhangliangming/HappyPlayer5.git 。
 
 - 微信
 
-![](https://i.imgur.com/e3hERHh.png)
+![](https://i.imgur.com/hOs6tPn.png)
 
 - 支付宝
 
-![](https://i.imgur.com/29AcEPA.png)
+![](https://i.imgur.com/DGB9Lq0.png)
