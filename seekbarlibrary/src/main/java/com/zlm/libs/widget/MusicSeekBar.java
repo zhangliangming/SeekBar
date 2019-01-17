@@ -214,7 +214,8 @@ public class MusicSeekBar extends CustomSeekBar {
             int[] location = new int[2];
             this.getLocationOnScreen(location);
 
-            int leftX = location[0] + getWidth() * getProgress() / getMax();
+
+            int leftX = (int) (location[0] + getWidth() * (float)getProgress() / getMax());
             //判断是否越界
             if ((leftX + mTimePopupWindow.getWidth()) > (location[0] + getWidth())) {
                 leftX = (location[0] + getWidth()) - mTimePopupWindow.getWidth();
@@ -337,7 +338,7 @@ public class MusicSeekBar extends CustomSeekBar {
                 int[] location = new int[2];
                 this.getLocationOnScreen(location);
 
-                int leftX = location[0] + getWidth() * getProgress() / getMax() - mTimePopupWindow.getWidth() / 2;
+                int leftX = (int) (location[0] + getWidth() * (float)getProgress() / getMax() - mTimePopupWindow.getWidth() / 2);
 
                 //判断是否越界
                 if ((leftX + mTimePopupWindow.getWidth()) > (location[0] + getWidth())) {

@@ -163,18 +163,20 @@ public class CustomSeekBar extends SeekBar {
 
 
         if (getMax() != 0) {
+            int secondRight = (int) ((float) getSecondaryProgress() / getMax() * getWidth());
             RectF secondProgressRect = new RectF(leftPadding, getHeight() / 2 - height,
-                    getSecondaryProgress() * getWidth() / getMax(), getHeight()
+                    secondRight, getHeight()
                     / 2 + height);
             canvas.drawRoundRect(secondProgressRect, rSize, rSize, mSecondProgressPaint);
 
+            int progressRight = (int) ((float) getProgress() / getMax() * getWidth());
             RectF progressRect = new RectF(leftPadding, getHeight() / 2 - height,
-                    getProgress() * getWidth() / getMax(), getHeight() / 2
+                    progressRight, getHeight() / 2
                     + height);
             canvas.drawRoundRect(progressRect, rSize, rSize, mProgressPaint);
 
 
-            int cx = getProgress() * getWidth() / getMax();
+            int cx = (int) ((float) getProgress() / getMax() * getWidth());
             if ((cx + rSize) > getWidth()) {
                 cx = getWidth() - rSize;
             } else {
